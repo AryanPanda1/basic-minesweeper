@@ -4,33 +4,7 @@ A sleek and modern implementation of the classic Minesweeper game, built with va
 
 ![Minesweeper Game](screenshot.png)
 
-## ✨ Features
 
-- **Multiple Difficulty Levels**
-  - Beginner (9x9, 10 mines)
-  - Intermediate (16x16, 40 mines)
-  - Expert (16x30, 99 mines)
-  - Custom mode (up to 30x30)
-
-- **Modern UI/UX**
-  - Clean, minimalist design
-  - Responsive layout
-  - Smooth animations
-  - Light and dark themes
-  - Theme preference persistence
-  - Sound effects with volume control
-
-- **Game Features**
-  - Real-time timer
-  - Mine counter
-  - Right-click to flag mines
-  - Game over screen with restart option
-  - Custom difficulty with input validation
-  - Interactive sound effects:
-    - Cell reveal
-    - Flag placement/removal
-    - Explosion sound
-    - Victory fanfare
 
 ## 🎮 How to Play
 
