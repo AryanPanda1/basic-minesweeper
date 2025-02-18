@@ -1,23 +1,20 @@
 # Modern Minesweeper 💣
 
-A sleek and modern implementation of the classic Minesweeper game, built with vanilla JavaScript, CSS, and HTML. Features a clean, responsive design with both light and dark themes.
-
-![Minesweeper Game](screenshot.png)
+A implementation of the classic Minesweeper game, built with vanilla JavaScript, CSS, and HTML. Features a clean, responsive design with both light and dark themes.
 
 
-
-## 🎮 How to Play
+##  How to Play
 
 1. Click any cell to reveal it
 2. Numbers indicate how many mines are adjacent to that cell
 3. Right-click to flag suspected mine locations
-4. Clear all non-mine cells to win!
+4. Clear all non-mine cells to win
 
-## 🚀 Quick Start
+##  Quick Start
 
-Simply open `index.html` in your web browser to start playing! No server or build process required.
+ open `index.html` in your web browser to start playing.No server or build process required.
 
-## 🎯 Controls
+##  Controls
 
 - **Left Click**: Reveal a cell
 - **Right Click**: Flag/unflag a cell
@@ -25,9 +22,9 @@ Simply open `index.html` in your web browser to start playing! No server or buil
 - **Sound Toggle**: Mute/unmute sound effects
 - **Volume Slider**: Adjust sound volume
 - **Difficulty**: Choose from preset levels or create your own
-- **New Game**: Start fresh anytime
+- **New Game**: Start a new game anytime
 
-## 🛠️ Technical Details
+##  Technical Details
 
 - Built with vanilla JavaScript (ES6+)
 - Object-oriented programming approach
@@ -37,17 +34,7 @@ Simply open `index.html` in your web browser to start playing! No server or buil
 - Responsive design using CSS Grid and Flexbox
 - No external dependencies
 
-## 📱 Responsive Design
-
-The game is fully responsive and works great on:
-- Desktop browsers
-- Tablets
-- Mobile devices (landscape mode recommended)
-
-## 🤝 Contributing
-
-Feel free to fork, open issues, and submit PRs. All contributions are welcome!
 
 ## 📜 License
 
-MIT License - feel free to use this code for your own projects!
+MIT License
