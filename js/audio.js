@@ -20,6 +20,7 @@ class AudioManager {
         
         // Initialize context on first user interaction
         this.initializeContext();
+        console.log(`Playing sound: ${soundName}`); // Debugging log
         
         switch (soundName) {
             case 'click':

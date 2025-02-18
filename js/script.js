@@ -32,15 +32,11 @@ class Minesweeper {
         this.gameOverElement = document.getElementById('game-over');
         this.restartButton = document.getElementById('restart');
         this.themeToggle = document.getElementById('theme-toggle');
-        this.customDifficultyDiv = document.getElementById('custom-difficulty');
-        this.customRowsInput = document.getElementById('custom-rows');
-        this.customColsInput = document.getElementById('custom-cols');
-        this.customMinesInput = document.getElementById('custom-mines');
-        this.applyCustomButton = document.getElementById('apply-custom');
-        
-        // Audio controls
         this.soundToggle = document.getElementById('sound-toggle');
         this.volumeSlider = document.getElementById('volume-slider');
+        
+        // Replay button
+        this.replayButton = document.getElementById('replay');
     }
 
     initializeAudioControls() {
@@ -66,20 +62,25 @@ class Minesweeper {
             this.startNewGame();
         });
         this.difficultySelect.addEventListener('change', () => {
-            if (this.difficultySelect.value === 'custom') {
-                this.customDifficultyDiv.classList.remove('hidden');
-            } else {
-                this.customDifficultyDiv.classList.add('hidden');
-                this.startNewGame();
-            }
+            this.startNewGame(); // Start new game on difficulty change
         });
         this.themeToggle.addEventListener('click', () => this.toggleTheme());
-        this.applyCustomButton.addEventListener('click', () => this.applyCustomDifficulty());
+        this.soundToggle.addEventListener('click', () => {
+            const isMuted = this.audio.toggleMute();
+            this.soundToggle.textContent = isMuted ? '🔈 Sound Off' : '🔊 Sound On';
+        });
+        this.volumeSlider.addEventListener('input', (e) => {
+            this.audio.setVolume(e.target.value / 100);
+        });
+        this.restartButton.addEventListener('click', () => {
+            this.startNewGame();
+        });
         
-        // Add input validation for custom difficulty
-        this.customRowsInput.addEventListener('input', () => this.validateCustomInputs());
-        this.customColsInput.addEventListener('input', () => this.validateCustomInputs());
-        this.customMinesInput.addEventListener('input', () => this.validateCustomInputs());
+        // Replay button event listener
+        this.replayButton.addEventListener('click', () => {
+            this.startNewGame();
+            this.replayButton.classList.add('hidden'); // Hide replay button after clicking
+        });
     }
 
     loadTheme() {
@@ -94,32 +95,6 @@ class Minesweeper {
         document.body.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
         this.themeToggle.textContent = newTheme === 'light' ? '🌞 Light Mode' : '🌙 Dark Mode';
-    }
-
-    validateCustomInputs() {
-        const rows = parseInt(this.customRowsInput.value) || 0;
-        const cols = parseInt(this.customColsInput.value) || 0;
-        const maxMines = Math.floor((rows * cols) * 0.9); // Maximum 90% of cells can be mines
-        
-        this.customMinesInput.max = maxMines;
-        
-        if (this.customMinesInput.value > maxMines) {
-            this.customMinesInput.value = maxMines;
-        }
-        
-        this.applyCustomButton.disabled = rows < 5 || rows > 30 || cols < 5 || cols > 30 || 
-                                        this.customMinesInput.value < 1 || this.customMinesInput.value > maxMines;
-    }
-
-    applyCustomDifficulty() {
-        const rows = parseInt(this.customRowsInput.value);
-        const cols = parseInt(this.customColsInput.value);
-        const mines = parseInt(this.customMinesInput.value);
-        
-        if (rows >= 5 && rows <= 30 && cols >= 5 && cols <= 30 && mines >= 1) {
-            this.difficulties.custom = { rows, cols, mines };
-            this.startNewGame();
-        }
     }
 
     startNewGame() {
@@ -140,6 +115,7 @@ class Minesweeper {
         
         this.gameOver = false;
         this.gameOverElement.classList.add('hidden');
+        this.replayButton.classList.add('hidden'); // Hide replay button initially
     }
 
     createBoard() {
@@ -251,13 +227,13 @@ class Minesweeper {
         if (this.board[row][col].isMine) {
             this.audio.play('explosion');
             this.revealAllMines();
-            this.endGame(false);
+            this.handleGameOver(false);
         } else {
             this.audio.play('click');
             this.revealCell(row, col);
             if (this.checkWin()) {
                 this.audio.play('win');
-                this.endGame(true);
+                this.handleGameOver(true);
             }
         }
     }
@@ -313,7 +289,7 @@ class Minesweeper {
         return true;
     }
 
-    endGame(won) {
+    handleGameOver(won) {
         this.gameOver = true;
         clearInterval(this.timerInterval);
         this.timerInterval = null;
@@ -321,6 +297,9 @@ class Minesweeper {
         const message = won ? 'Congratulations! You won! 🎉' : 'Game Over! 💥';
         this.gameOverElement.querySelector('.message').textContent = message;
         this.gameOverElement.classList.remove('hidden');
+        
+        // Show replay button
+        this.replayButton.classList.remove('hidden');
     }
 
     startTimer() {
