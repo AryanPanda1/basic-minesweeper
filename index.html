@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Minesweeper</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Minesweeper</h1>
+            <div class="controls">
+                <div class="game-info">
+                    <span id="mine-count"> 10</span>
+                    <span id="timer"> 0</span>
+                </div>
+                <div class="settings">
+                    <button id="theme-toggle">🌞 Light Mode</button>
+                    <button id="new-game">New Game</button>
+                    <div class="sound-controls">
+                        <button id="sound-toggle">🔊 Sound On</button>
+                        <div class="volume-control">
+                            <label for="volume-slider">Volume:</label>
+                            <input type="range" id="volume-slider" min="0" max="100" value="50">
+                        </div>
+                    </div>
+                    <select id="difficulty">
+                        <option value="beginner">Beginner</option>
+                        <option value="intermediate">Intermediate</option>
+                        <option value="expert">Expert</option>
+                        <option value="custom">Custom</option>
+                    </select>
+                </div>
+                <div id="custom-difficulty" class="hidden">
+                    <input type="number" id="custom-rows" placeholder="Rows (5-30)" min="5" max="30">
+                    <input type="number" id="custom-cols" placeholder="Columns (5-30)" min="5" max="30">
+                    <input type="number" id="custom-mines" placeholder="Mines" min="1">
+                    <button id="apply-custom">Apply</button>
+                </div>
+            </div>
+        </header>
+        <div id="game-board"></div>
+        <div id="game-over" class="hidden">
+            <div class="message"></div>
+            <button id="restart">Play Again</button>
+        </div>
+    </div>
+    <script src="js/audio.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
